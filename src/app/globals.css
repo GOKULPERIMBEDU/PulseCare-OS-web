@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3f6fb;
+  --foreground: #102033;
+  --surface: #ffffff;
+  --surface-2: #eef3f8;
+  --muted: #5d6e81;
+  --line: #d5e0ea;
+  --teal: #0f766e;
+  --teal-soft: #ccfbf1;
+  --navy: #12344d;
+  --ok: #067647;
+  --ok-soft: #ecfdf3;
+  --warn: #b54708;
+  --warn-soft: #fffaeb;
+  --danger: #b42318;
+  --danger-soft: #fef3f2;
+  --shadow: 0 10px 40px rgba(16, 32, 51, 0.06);
+}
+
+.dark {
+  --background: #0b1220;
+  --foreground: #e8eef6;
+  --surface: #121a2b;
+  --surface-2: #182234;
+  --muted: #93a4b8;
+  --line: #243044;
+  --teal: #2dd4bf;
+  --teal-soft: #134e4a;
+  --navy: #93c5fd;
+  --ok: #32d583;
+  --ok-soft: #053321;
+  --warn: #fdb022;
+  --warn-soft: #3b2710;
+  --danger: #f97066;
+  --danger-soft: #3b1210;
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-navy: var(--navy);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--line);
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--teal-soft);
+  color: var(--foreground);
+}
+
+.pc-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow);
+}
+
+@media print {
+  aside,
+  header,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .lg\:pl-64 {
+    padding-left: 0 !important;
+  }
+
+  body {
+    background: white;
+  }
+}
+
+.pc-grid-bg {
+  background-image:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.08), transparent 28%),
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: auto, 44px 44px, 44px 44px;
 }
