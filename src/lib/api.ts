@@ -1,13 +1,15 @@
 import { ApiSuccess } from '@/types';
 
-function env(name: keyof ImportMetaEnv, fallback: string): string {
+function readEnv(name: keyof ImportMetaEnv): string {
   const value = import.meta.env[name];
-  return typeof value === 'string' && value.length > 0 ? value : fallback;
+  return typeof value === 'string' ? value.trim().replace(/\/$/, '') : '';
 }
 
-const API_ORIGIN = env('VITE_API_BASE_URL', 'http://localhost:5000').replace(/\/$/, '');
-export const API_BASE_URL = API_ORIGIN.endsWith('/api') ? API_ORIGIN : `${API_ORIGIN}/api`;
-export const SOCKET_URL = env('VITE_SOCKET_URL', API_BASE_URL.replace(/\/api\/?$/, ''));
+const apiOrigin = readEnv('VITE_API_BASE_URL');
+const socketOrigin = readEnv('VITE_SOCKET_URL') || apiOrigin;
+
+export const API_BASE_URL = apiOrigin.endsWith('/api') ? apiOrigin : `${apiOrigin}/api`;
+export const SOCKET_URL = socketOrigin.replace(/\/api\/?$/, '');
 
 const TOKEN_KEY = 'pulsecare.token';
 
