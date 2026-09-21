@@ -1,5 +1,3 @@
-'use client';
-
 import { AppointmentStatus } from '@/types';
 import { entityName } from '@/lib/format';
 import { Appointment } from '@/types';

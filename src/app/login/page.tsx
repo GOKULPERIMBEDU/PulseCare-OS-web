@@ -1,8 +1,5 @@
-'use client';
-
-import { FormEvent, Suspense, useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
 import { Field, Input } from '@/components/ui/Field';
@@ -27,25 +24,9 @@ const ROLE_PREFILL: Record<string, { email: string; password: string }> = {
 };
 
 export default function LoginPage() {
-  return (
-    <Suspense fallback={<LoginFallback />}>
-      <LoginForm />
-    </Suspense>
-  );
-}
-
-function LoginFallback() {
-  return (
-    <div className="flex min-h-screen items-center justify-center text-sm text-muted">
-      Loading sign-in…
-    </div>
-  );
-}
-
-function LoginForm() {
   const { login, user, loading, logout } = useAuth();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { data: demoPayload } = useApiResource<DemoAccountsPayload>('/auth/demo-accounts');
   const accounts: DemoAccount[] = demoPayload?.accounts ?? [];
   const demo = accounts.find((item) => item.key === searchParams.get('demo'));
@@ -67,9 +48,9 @@ function LoginForm() {
   useEffect(() => {
     if (demo || rolePrefill) return;
     if (!loading && user) {
-      router.replace(roleHomePath(user.role));
+      navigate(roleHomePath(user.role), { replace: true });
     }
-  }, [demo, rolePrefill, loading, router, user]);
+  }, [demo, rolePrefill, loading, navigate, user]);
 
   useEffect(() => {
     if (!demo || loading || autoLoginStarted.current) return;
@@ -80,7 +61,7 @@ function LoginForm() {
       try {
         if (user) logout();
         const session = await login(demo.email, demo.password);
-        router.replace(roleHomePath(session.user.role));
+        navigate(roleHomePath(session.user.role), { replace: true });
       } catch (err) {
         autoLoginStarted.current = false;
         setError(err instanceof ApiError ? err.message : 'Unable to sign in');
@@ -88,7 +69,7 @@ function LoginForm() {
         setPending(false);
       }
     })();
-  }, [demo, loading, login, logout, router, user]);
+  }, [demo, loading, login, logout, navigate, user]);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -96,7 +77,7 @@ function LoginForm() {
     setPending(true);
     try {
       const session = await login(email, password);
-      router.push(roleHomePath(session.user.role));
+      navigate(roleHomePath(session.user.role));
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Unable to sign in');
     } finally {
@@ -163,13 +144,13 @@ function LoginForm() {
           </div>
           <p className="text-sm text-muted">
             New patient?{' '}
-            <Link href="/register" className="text-teal">
+            <Link to="/register" className="text-teal">
               Create an account
             </Link>
           </p>
           <p className="text-sm text-muted">
             New organization?{' '}
-            <Link href="/register-hospital" className="text-teal">
+            <Link to="/register-hospital" className="text-teal">
               Register your hospital
             </Link>
           </p>

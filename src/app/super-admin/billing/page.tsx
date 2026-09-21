@@ -1,5 +1,3 @@
-'use client';
-
 import { api } from '@/lib/api';
 import { SaaSInvoice } from '@/types';
 import { formatDate, money } from '@/lib/format';

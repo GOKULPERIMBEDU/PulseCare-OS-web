@@ -1,7 +1,4 @@
-'use client';
-
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Activity,
   ClipboardList,
@@ -60,8 +57,8 @@ const NAV: Record<UserRole, { href: string; label: string; icon: typeof LayoutDa
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
   const { theme, toggle } = useTheme();
-  const pathname = usePathname();
-  const router = useRouter();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   if (!user) return null;
   const links = NAV[user.role];
@@ -70,7 +67,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
       <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-line bg-surface p-4 lg:flex lg:flex-col">
-        <Link href={roleHomePath(user.role)} className="mb-8 px-2">
+        <Link to={roleHomePath(user.role)} className="mb-8 px-2">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">PulseCare</p>
           <p className="text-lg font-semibold">OS Clinical</p>
           <p className="mt-1 truncate text-xs text-muted">{workspace}</p>
@@ -82,7 +79,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             return (
               <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm ${
                   active ? 'bg-teal-soft text-teal' : 'text-muted hover:bg-surface-2 hover:text-foreground'
                 }`}
@@ -126,7 +123,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <button
               onClick={() => {
                 logout();
-                router.push('/');
+                navigate('/');
               }}
               className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-muted hover:bg-surface-2"
             >

@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Appointment, Invoice } from '@/types';
 import { entityName } from '@/lib/format';
 import { useMoney } from '@/hooks/useMoney';
@@ -30,7 +28,7 @@ export default function PatientHomePage() {
         title="Your care at a glance"
         description="Upcoming visits, live clinic status, history, and invoices."
         actions={
-          <Link href="/patient/book">
+          <Link to="/patient/book">
             <Button>Book appointment</Button>
           </Link>
         }

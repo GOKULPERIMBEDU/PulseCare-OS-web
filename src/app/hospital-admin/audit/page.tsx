@@ -1,5 +1,3 @@
-'use client';
-
 import { AuditLog } from '@/types';
 import { fullName, formatDate } from '@/lib/format';
 import { useApiResource } from '@/hooks/useApiResource';

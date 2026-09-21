@@ -1,5 +1,3 @@
-'use client';
-
 import { AnalyticsOverview } from '@/types';
 import { useAuth } from '@/hooks/useAuth';
 import { useMoney } from '@/hooks/useMoney';

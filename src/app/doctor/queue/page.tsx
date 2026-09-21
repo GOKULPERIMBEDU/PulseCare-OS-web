@@ -1,5 +1,3 @@
-'use client';
-
 import { api } from '@/lib/api';
 import { AppointmentStatus } from '@/types';
 import { useAuth } from '@/hooks/useAuth';

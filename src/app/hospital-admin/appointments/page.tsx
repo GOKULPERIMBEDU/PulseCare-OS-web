@@ -1,5 +1,3 @@
-'use client';
-
 import { Appointment } from '@/types';
 import { entityName } from '@/lib/format';
 import { useApiResource } from '@/hooks/useApiResource';

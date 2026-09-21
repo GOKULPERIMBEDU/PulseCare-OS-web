@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Invoice } from '@/types';
 import { formatDate } from '@/lib/format';
 import { useMoney } from '@/hooks/useMoney';
@@ -33,7 +31,7 @@ export default function PatientBillingPage() {
               <PaymentBadge status={item.paymentStatus} />
             </td>
             <td className="px-4 py-3">
-              <Link className="text-sm text-teal" href={`/patient/billing/${item._id}`}>
+              <Link className="text-sm text-teal" to={`/patient/billing/${item._id}`}>
                 View / download
               </Link>
             </td>

@@ -1,5 +1,3 @@
-'use client';
-
 import { Appointment, Patient, Prescription } from '@/types';
 import { formatDate } from '@/lib/format';
 import { PageHeader } from '@/components/ui/PageHeader';

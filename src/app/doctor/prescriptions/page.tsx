@@ -1,5 +1,3 @@
-'use client';
-
 import { Prescription } from '@/types';
 import { entityName, formatDate } from '@/lib/format';
 import { useApiResource } from '@/hooks/useApiResource';

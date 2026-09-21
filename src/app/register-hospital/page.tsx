@@ -1,8 +1,6 @@
-'use client';
-
 import { FormEvent, useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
 import { Field, Input, Select } from '@/components/ui/Field';
@@ -13,7 +11,7 @@ import { roleHomePath } from '@/lib/roles';
 
 export default function RegisterHospitalPage() {
   const { registerHospital } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const [pending, setPending] = useState(false);
   const [currency, setCurrency] = useState<BaseCurrency>('INR');
@@ -48,7 +46,7 @@ export default function RegisterHospitalPage() {
           password: form.get('adminPassword'),
         },
       });
-      router.push(roleHomePath(session.user.role));
+      navigate(roleHomePath(session.user.role));
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Unable to register hospital');
     } finally {
@@ -128,7 +126,7 @@ export default function RegisterHospitalPage() {
 
         {error ? <p className="sm:col-span-2 text-sm text-danger">{error}</p> : null}
         <div className="sm:col-span-2 flex items-center justify-between">
-          <Link href="/login" className="text-sm text-muted">
+          <Link to="/login" className="text-sm text-muted">
             Already have an account
           </Link>
           <Button type="submit" disabled={pending}>

@@ -1,5 +1,3 @@
-'use client';
-
 import { useCallback } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { money as formatMoney } from '@/lib/format';

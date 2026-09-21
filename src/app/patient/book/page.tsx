@@ -1,7 +1,5 @@
-'use client';
-
 import { FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 import { api } from '@/lib/api';
 import { AvailabilityResponse, Doctor } from '@/types';
 import { entityName, todayISO } from '@/lib/format';
@@ -13,7 +11,7 @@ import { Field, Input, Select, Textarea } from '@/components/ui/Field';
 import { EmptyState, LoadingState, QueryError } from '@/components/ui/DataState';
 
 export default function BookPage() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { money } = useMoney();
   const { data, loading, error: doctorsError } = useApiResource<Doctor[]>('/doctors');
   const doctors = data ?? [];
@@ -51,7 +49,7 @@ export default function BookPage() {
         method: 'POST',
         body: JSON.stringify({ doctorId, date, timeSlot, reason }),
       });
-      router.push('/patient');
+      navigate('/patient');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to book this slot');
     }

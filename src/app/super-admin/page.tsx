@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { PlatformOverview } from '@/types';
 import { money } from '@/lib/format';
 import { useApiResource } from '@/hooks/useApiResource';
@@ -20,7 +18,7 @@ export default function SuperAdminPage() {
         title="Platform command center"
         description="All registered hospitals, SaaS subscription revenue, and system health. Clinical charts stay inside each hospital tenant."
         actions={
-          <Link href="/super-admin/hospitals">
+          <Link to="/super-admin/hospitals">
             <Button variant="secondary">View hospitals</Button>
           </Link>
         }

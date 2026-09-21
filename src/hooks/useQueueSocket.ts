@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { getToken, SOCKET_URL } from '@/lib/api';

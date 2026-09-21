@@ -1,7 +1,5 @@
-'use client';
-
 import { useEffect, useId, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 import {
   Activity,
   Building2,
@@ -76,7 +74,7 @@ const ADVANCED = [
 ];
 
 export function DemoGuide() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const titleId = useId();
   const [open, setOpen] = useState(false);
   const { data, loading } = useApiResource<DemoAccountsPayload>('/auth/demo-accounts');
@@ -107,7 +105,7 @@ export function DemoGuide() {
 
   function startDemo(key: DemoAccountKey) {
     setOpen(false);
-    router.push(`/login?role=${ROLE_QUERY[key]}`);
+    navigate(`/login?role=${ROLE_QUERY[key]}`);
   }
 
   function accountsFor(keys: DemoAccountKey[]) {

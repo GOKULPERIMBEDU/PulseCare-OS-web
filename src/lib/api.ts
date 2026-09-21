@@ -1,20 +1,21 @@
 import { ApiSuccess } from '@/types';
 
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000/api';
+function env(name: keyof ImportMetaEnv, fallback: string): string {
+  const value = import.meta.env[name];
+  return typeof value === 'string' && value.length > 0 ? value : fallback;
+}
 
-export const SOCKET_URL =
-  process.env.NEXT_PUBLIC_SOCKET_URL ?? 'http://localhost:5000';
+const API_ORIGIN = env('VITE_API_BASE_URL', 'http://localhost:5000').replace(/\/$/, '');
+export const API_BASE_URL = API_ORIGIN.endsWith('/api') ? API_ORIGIN : `${API_ORIGIN}/api`;
+export const SOCKET_URL = env('VITE_SOCKET_URL', API_BASE_URL.replace(/\/api\/?$/, ''));
 
 const TOKEN_KEY = 'pulsecare.token';
 
 export function getToken(): string | null {
-  if (typeof window === 'undefined') return null;
   return window.localStorage.getItem(TOKEN_KEY);
 }
 
 export function setToken(token: string | null): void {
-  if (typeof window === 'undefined') return;
   if (token) window.localStorage.setItem(TOKEN_KEY, token);
   else window.localStorage.removeItem(TOKEN_KEY);
 }

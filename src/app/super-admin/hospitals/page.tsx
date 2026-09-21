@@ -1,5 +1,3 @@
-'use client';
-
 import { PlatformHospital } from '@/types';
 import { formatDate, money } from '@/lib/format';
 import { useApiResource } from '@/hooks/useApiResource';

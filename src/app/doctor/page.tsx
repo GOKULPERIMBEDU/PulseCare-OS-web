@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Appointment } from '@/types';
 import { entityName, todayISO } from '@/lib/format';
 import { useApiResource } from '@/hooks/useApiResource';
@@ -21,7 +19,7 @@ export default function DoctorHomePage() {
         title="Today’s clinic"
         description="Schedule, live status, and one-click access to EMR and prescriptions."
         actions={
-          <Link href="/doctor/queue">
+          <Link to="/doctor/queue">
             <Button>Open live queue</Button>
           </Link>
         }
@@ -41,11 +39,11 @@ export default function DoctorHomePage() {
             <td className="px-4 py-3">
               <div className="flex gap-2">
                 {typeof item.patientId !== 'string' ? (
-                  <Link className="text-sm text-teal" href={`/doctor/patients/${item.patientId._id}`}>
+                  <Link className="text-sm text-teal" to={`/doctor/patients/${item.patientId._id}`}>
                     EMR
                   </Link>
                 ) : null}
-                <Link className="text-sm text-teal" href={`/doctor/prescribe/${item._id}`}>
+                <Link className="text-sm text-teal" to={`/doctor/prescribe/${item._id}`}>
                   Prescribe
                 </Link>
               </div>

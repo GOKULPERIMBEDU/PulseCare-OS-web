@@ -1,8 +1,6 @@
-'use client';
-
 import { FormEvent, useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
 import { Field, Input, Select } from '@/components/ui/Field';
@@ -14,7 +12,7 @@ import { EmptyState, LoadingState } from '@/components/ui/DataState';
 
 export default function RegisterPage() {
   const { register } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const [pending, setPending] = useState(false);
   const { data, loading, error: hospitalsError } = useApiResource<HospitalDirectoryItem[]>('/auth/hospitals');
@@ -55,7 +53,7 @@ export default function RegisterPage() {
           },
         ],
       });
-      router.push('/patient');
+      navigate('/patient');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Unable to register');
     } finally {
@@ -130,7 +128,7 @@ export default function RegisterPage() {
           <p className="sm:col-span-2 text-sm text-danger">{error || hospitalsError}</p>
         ) : null}
         <div className="sm:col-span-2 flex items-center justify-between">
-          <Link href="/login" className="text-sm text-muted">Back to sign in</Link>
+          <Link to="/login" className="text-sm text-muted">Back to sign in</Link>
           <Button type="submit" disabled={pending || !hospitalId}>
             {pending ? 'Creating…' : 'Create account'}
           </Button>

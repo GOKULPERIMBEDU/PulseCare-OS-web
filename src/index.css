@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --font-geist-sans: "Geist", system-ui, sans-serif;
+  --font-geist-mono: "Geist Mono", ui-monospace, monospace;
   --background: #f3f6fb;
   --foreground: #102033;
   --surface: #ffffff;
@@ -63,7 +65,8 @@
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
 }
 

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Activity, Shield, Stethoscope, CalendarCheck } from 'lucide-react';
 import { DemoGuide } from '@/components/demo/DemoGuide';
 
@@ -12,7 +12,7 @@ export default function LandingPage() {
             <p className="text-sm text-muted">Hospital operating system</p>
           </div>
           <Link
-            href="/login?role=superadmin"
+            to="/login?role=superadmin"
             className="rounded-md bg-white/10 px-3 py-1 text-xs font-medium text-foreground/80 transition-colors hover:bg-white/15 hover:text-foreground"
           >
             Platform Admin Console
@@ -20,13 +20,13 @@ export default function LandingPage() {
         </div>
         <div className="flex items-center gap-4">
           <Link
-            href="/register-hospital"
+            to="/register-hospital"
             className="text-sm font-medium text-muted transition-colors hover:text-foreground"
           >
             Register hospital
           </Link>
           <Link
-            href="/login"
+            to="/login"
             className="text-sm font-medium text-muted transition-colors hover:text-foreground"
           >
             Sign in
@@ -44,13 +44,13 @@ export default function LandingPage() {
             an isolated workspace for appointments, live queues, records, and billing.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/register-hospital" className="rounded-xl bg-teal px-5 py-3 text-sm font-medium text-white">
+            <Link to="/register-hospital" className="rounded-xl bg-teal px-5 py-3 text-sm font-medium text-white">
               Register your hospital
             </Link>
-            <Link href="/login" className="rounded-xl border border-line bg-surface px-5 py-3 text-sm">
+            <Link to="/login" className="rounded-xl border border-line bg-surface px-5 py-3 text-sm">
               Open console
             </Link>
-            <Link href="/register" className="rounded-xl border border-line bg-surface px-5 py-3 text-sm">
+            <Link to="/register" className="rounded-xl border border-line bg-surface px-5 py-3 text-sm">
               Register as patient
             </Link>
           </div>

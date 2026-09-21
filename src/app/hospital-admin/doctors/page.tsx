@@ -1,5 +1,3 @@
-'use client';
-
 import { FormEvent, useState } from 'react';
 import { api } from '@/lib/api';
 import { Doctor } from '@/types';

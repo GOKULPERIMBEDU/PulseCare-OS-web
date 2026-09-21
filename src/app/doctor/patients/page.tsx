@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Patient } from '@/types';
 import { entityName, formatDate } from '@/lib/format';
 import { useApiResource } from '@/hooks/useApiResource';
@@ -28,7 +26,7 @@ export default function DoctorPatientsPage() {
             <td className="px-4 py-3 text-muted">{formatDate(patient.dateOfBirth)}</td>
             <td className="px-4 py-3 text-muted">{patient.allergies.join(', ') || 'None listed'}</td>
             <td className="px-4 py-3">
-              <Link className="text-sm text-teal" href={`/doctor/patients/${patient._id}`}>
+              <Link className="text-sm text-teal" to={`/doctor/patients/${patient._id}`}>
                 Open chart
               </Link>
             </td>

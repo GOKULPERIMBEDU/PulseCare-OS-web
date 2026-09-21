@@ -1,7 +1,5 @@
-'use client';
-
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { AppShell } from '@/components/layout/AppShell';
 import { UserRole } from '@/types';
@@ -15,18 +13,18 @@ export function Guard({
   children: React.ReactNode;
 }) {
   const { user, loading } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (loading) return;
     if (!user) {
-      router.replace('/login');
+      navigate('/login', { replace: true });
       return;
     }
     if (!roles.includes(user.role)) {
-      router.replace(roleHomePath(user.role));
+      navigate(roleHomePath(user.role), { replace: true });
     }
-  }, [loading, roles, router, user]);
+  }, [loading, roles, navigate, user]);
 
   if (loading || !user || !roles.includes(user.role)) {
     return (

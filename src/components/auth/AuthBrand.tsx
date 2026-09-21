@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
 type Variant = 'default' | 'onDark';
@@ -17,7 +17,7 @@ const styles: Record<Variant, { back: string; brand: string }> = {
 export function AuthHomeLink({ variant = 'default' }: { variant?: Variant }) {
   return (
     <Link
-      href="/"
+      to="/"
       className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${styles[variant].back}`}
     >
       <ArrowLeft className="h-4 w-4" />
@@ -34,7 +34,7 @@ export function AuthLogo({
   prominent?: boolean;
 }) {
   return (
-    <Link href="/" className="inline-block">
+    <Link to="/" className="inline-block">
       <p
         className={
           prominent

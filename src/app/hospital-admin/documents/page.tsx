@@ -1,5 +1,3 @@
-'use client';
-
 import { DocumentsManager } from '@/components/documents/DocumentsManager';
 import { PageHeader } from '@/components/ui/PageHeader';
 

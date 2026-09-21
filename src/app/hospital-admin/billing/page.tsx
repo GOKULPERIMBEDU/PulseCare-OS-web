@@ -1,5 +1,3 @@
-'use client';
-
 import { api } from '@/lib/api';
 import { Invoice } from '@/types';
 import { entityName } from '@/lib/format';
